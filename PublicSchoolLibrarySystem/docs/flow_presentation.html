@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public School Library System – Usage Flow</title>
+  <style>
+    :root {
+      --blue: #3498db;
+      --dark: #2c3e50;
+      --light: #ecf0f1;
+      --green: #2ecc71;
+      --red: #e74c3c;
+    }
+    html, body { margin: 0; padding: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background: var(--light); color: #333; }
+    header { background: var(--blue); color: #fff; padding: 24px 28px; }
+    header h1 { margin: 0; font-size: 24px; }
+    header p { margin: 6px 0 0; opacity: 0.9; }
+    nav { background: #fff; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 20; }
+    nav .toc { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 20px; }
+    nav .toc a { color: var(--dark); text-decoration: none; padding: 8px 12px; border-radius: 6px; border: 1px solid #e0e0e0; }
+    nav .toc a:hover { background: #f7f9fa; }
+    section { max-width: 980px; margin: 20px auto; background: #fff; border: 1px solid #e1e6ea; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    section .slide { padding: 22px 24px; }
+    h2 { margin-top: 0; color: var(--dark); }
+    ul { margin: 10px 0 0 18px; }
+    li { margin: 6px 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid #e8edf2; border-radius: 8px; padding: 14px; background: #fafcff; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .pill.blue { background: #eaf4fd; color: var(--blue); }
+    .pill.green { background: #eafaf1; color: var(--green); }
+    .pill.red { background: #fdeeee; color: var(--red); }
+    code { background: #f3f6f8; border: 1px solid #e1e6ea; border-radius: 6px; padding: 2px 6px; }
+    .footer { text-align: center; color: #667; padding: 30px 0 50px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📘 Public School Library System</h1>
+    <p>Quick presentation of the usage flow: login → dashboard → manage data → borrow/return → logs and reports.</p>
+  </header>
+
+  <nav>
+    <div class="toc">
+      <a href="#setup">Setup</a>
+      <a href="#login">Login</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#students">Students</a>
+      <a href="#books">Books</a>
+      <a href="#borrow">Borrow</a>
+      <a href="#return">Return</a>
+      <a href="#logs">Activity Logs</a>
+      <a href="#reports">Reports</a>
+      <a href="#users">User Management</a>
+      <a href="#tips">Tips</a>
+    </div>
+  </nav>
+
+  <section id="setup">
+    <div class="slide">
+      <h2>Setup</h2>
+      <ul>
+        <li>Install XAMPP and start <strong>MySQL</strong>.</li>
+        <li>Import <code>PublicSchoolLibrarySystem/Database/library_db.sql</code> into MySQL.</li>
+        <li>Build: <code>dotnet build PublicSchoolLibrarySystem.sln</code></li>
+        <li>Run: open the solution in Visual Studio and press <strong>F5</strong>, or run the compiled app.</li>
+        <li>Default users:
+          <ul>
+            <li><span class="pill blue">Admin</span> <code>admin / admin123</code></li>
+            <li><span class="pill blue">Librarian</span> <code>librarian / lib123</code></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="login">
+    <div class="slide">
+      <h2>Login Flow</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1) Open App</h3>
+          <ul>
+            <li>Start at the <strong>Login</strong> screen.</li>
+            <li>Select a role and enter credentials.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2) Successful Login</h3>
+          <ul>
+            <li>App navigates to the <strong>Dashboard</strong>.</li>
+            <li>Top-right shows your user info.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard">
+    <div class="slide">
+      <h2>Dashboard</h2>
+      <ul>
+        <li>Left sidebar: navigation to <em>Books, Students, Borrow/Return, Activity Logs, Reports, Users</em>.</li>
+        <li>Main tiles summarize counts: books, students, borrowed, returned.</li>
+        <li>Every page has a <span class="pill blue">Back</span> button to return to Dashboard.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="students">
+    <div class="slide">
+      <h2>Manage Students</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Add / Update</h3>
+          <ul>
+            <li>Enter <strong>Full Name</strong>.</li>
+            <li>Select <strong>College</strong>: CICS, CTED, CHM, CA, CCJE, CBEA.</li>
+            <li>Select <strong>Year</strong> (1–4) and <strong>Section</strong> (A–B).</li>
+            <li>Optional: contact number.</li>
+            <li>Click <span class="pill green">Add</span> or <span class="pill blue">Update</span>.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Delete</h3>
+          <ul>
+            <li>Select a student in the grid and click <span class="pill red">Delete</span>.</li>
+            <li>If the student has borrow history, you’ll be prompted to remove those records; active borrows will restore book stock.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <div class="slide">
+      <h2>Manage Books</h2>
+      <ul>
+        <li>Add or update book details: title, author, category, ISBN, quantity.</li>
+        <li>Delete books that are no longer in the catalog.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="borrow">
+    <div class="slide">
+      <h2>Borrow Flow</h2>
+      <ol>
+        <li>Open <strong>Borrow / Return</strong>.</li>
+        <li>Select a <strong>Student</strong> and a <strong>Book</strong> from dropdowns.</li>
+        <li>Click <span class="pill blue">Borrow</span>; quantity decreases by one.</li>
+        <li>Borrowed records appear in the grid with status <code>Borrowed</code>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="return">
+    <div class="slide">
+      <h2>Return Flow</h2>
+      <ol>
+        <li>Select a row in the borrowed grid.</li>
+        <li>Click <span class="pill green">Return</span>; status becomes <code>Returned</code>, quantity increases by one.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="logs">
+    <div class="slide">
+      <h2>Activity Logs</h2>
+      <ul>
+        <li>Shows actions like <em>Add/Update/Delete</em> across modules.</li>
+        <li>Useful for auditing changes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="reports">
+    <div class="slide">
+      <h2>Reports</h2>
+      <ul>
+        <li>Summaries of borrowed/returned activity and counts.</li>
+        <li>Use filters (if available) to refine results.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="users">
+    <div class="slide">
+      <h2>User Management</h2>
+      <ul>
+        <li>Add and update users with roles: <strong>Admin</strong> or <strong>Librarian</strong>.</li>
+        <li>Delete users when necessary.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="slide">
+      <h2>Tips</h2>
+      <ul>
+        <li>Use the <strong>Back</strong> button on each page to return to Dashboard.</li>
+        <li>Students grid headers: <strong>College</strong>, <strong>Year &amp; Section</strong>.</li>
+        <li>Database connection string is in <code>Modules/DbConnection.vb</code>.</li>
+        <li>Seed books are auto-imported at startup; see <code>Modules/DatabaseSeeder.vb</code> and <code>Modules/BookImporter.vb</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">© PSLBS – Simple flow presentation for onboarding and review.</div>
+  
+</body>
+</html>
